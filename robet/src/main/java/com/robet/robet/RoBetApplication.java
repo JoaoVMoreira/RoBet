@@ -9,6 +9,4 @@ public class RoBetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RoBetApplication.class, args);
 	}
-
-
 }
