@@ -9,8 +9,18 @@ import java.util.List;
 public record ConfrontoIdDTO(
         @JsonProperty("events") List<Id> events
 ) {
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     public record Id(
-            @JsonProperty("id") int id
-    ) {}
+            @JsonProperty("id") int id,
+            @JsonProperty("homeTeam") Team homeTeam,
+            @JsonProperty("awayTeam") Team awayTeam,
+            @JsonProperty("status") Status status
+    ){}
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record Team(@JsonProperty("shortName") String shortName){}
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record Status(@JsonProperty("code") Integer code){}
 }
