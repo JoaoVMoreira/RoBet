@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record StatsEscanteiosDTO(
+public record StatsDTO(
         @JsonProperty("statistics") List<Groups> groups
 ){
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,8 +21,3 @@ public record StatsEscanteiosDTO(
         }
     }
 }
-
-
-/*
-
-* */
