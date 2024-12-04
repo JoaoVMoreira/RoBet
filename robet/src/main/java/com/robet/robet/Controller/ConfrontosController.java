@@ -43,11 +43,11 @@ public class ConfrontosController {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0");
-
         HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
+        String url = "https://www.sofascore.com/api/v1/unique-tournament/325/season/58766/team-of-the-week/rounds?limit=100";
         try{
             ResponseEntity<RodadaAtualDTO> response = restTemplate.exchange(
-                    "https://www.sofascore.com/api/v1/unique-tournament/325/season/58766/team-of-the-week/rounds?limit=100",
+                    url,
                     HttpMethod.GET,
                     entity,
                     RodadaAtualDTO.class);

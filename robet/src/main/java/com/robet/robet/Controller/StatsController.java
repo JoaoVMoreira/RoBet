@@ -6,6 +6,9 @@ import com.robet.robet.Model.StatsTeam.StatsTeam;
 import com.robet.robet.Model.StatsTeam.StatsTeamRepository;
 import com.robet.robet.Service.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -28,8 +31,12 @@ public class StatsController {
     @GetMapping("/{confrontoId}")
     public StatsDTO.Groups.StatisticsItems.Stats getEscanteiosStats(@PathVariable Integer confrontoId){
         RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders header = new HttpHeaders();
+        header.set("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0");
+        HttpEntity<String> entity = new HttpEntity<>(header);
+        String url = "https://www.sofascore.com/api/v1/event/" + confrontoId + "/statistics";
         try {
-            ResponseEntity<StatsDTO> response = restTemplate.getForEntity("https://www.sofascore.com/api/v1/event/" + confrontoId + "/statistics", StatsDTO.class);
+            ResponseEntity<StatsDTO> response = restTemplate.exchange(url, HttpMethod.GET, entity, StatsDTO.class);
             return response.getBody().groups().get(0).statisticsItems().get(0).stats().get(5);
 
         }catch (Exception e){
